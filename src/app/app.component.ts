@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Civility, GeothermikApiService, SupportEstimationDto, SupportEstimationRequestDto } from 'generated-sources/geothermik-api-client';
+import {
+  Civility,
+  GeothermikApiService,
+  SupportEstimationDto,
+  SupportEstimationRequestDto,
+} from 'generated-sources/geothermik-api-client';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'geothermik-front-angular';
   apiResponse?: SupportEstimationDto;
 
-  constructor(private geothermikApiService: GeothermikApiService) { }
+  constructor(private geothermikApiService: GeothermikApiService) {}
 
   ngOnInit(): void {
     console.log('AppComponent ngOnInit');
@@ -35,14 +40,22 @@ export class AppComponent implements OnInit {
       surface: 100,
     };
 
-    this.geothermikApiService.estimateSupport(supportEstimationRequest).subscribe({
-      next: (response) => {
-        console.log('AppComponent > sendSupportEstimationRequest > response', response);
-        this.apiResponse = response;
-      },
-      error: (error) => {
-        console.log('AppComponent > sendSupportEstimationRequest > error', error);
-      }
-    });
+    this.geothermikApiService
+      .estimateSupport(supportEstimationRequest)
+      .subscribe({
+        next: (response) => {
+          console.log(
+            'AppComponent > sendSupportEstimationRequest > response',
+            response
+          );
+          this.apiResponse = response;
+        },
+        error: (error) => {
+          console.log(
+            'AppComponent > sendSupportEstimationRequest > error',
+            error
+          );
+        },
+      });
   }
 }
