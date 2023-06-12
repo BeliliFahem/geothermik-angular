@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 # generated files
-/generated-sources/
+generated-sources/
+node_modules/

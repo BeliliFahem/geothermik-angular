@@ -1,20 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "ignorePatterns": ["projects/**/*"],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": ["plugin:prettier/recommended"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ]
+        "project": ["tsconfig.json"]
       },
       "extends": [
         "eslint:recommended",
@@ -22,7 +15,8 @@
         "plugin:@typescript-eslint/strict",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "no-console": "error",
@@ -75,45 +69,25 @@
           "warn",
           {
             "selector": "default",
-            "format": [
-              "camelCase"
-            ]
+            "format": ["camelCase"]
           },
           {
             "selector": "variable",
-            "format": [
-              "camelCase",
-              "UPPER_CASE"
-            ]
+            "format": ["camelCase", "UPPER_CASE"]
           },
           {
             "selector": "parameter",
-            "format": [
-              "camelCase"
-            ]
+            "format": ["camelCase"]
           },
           {
             "selector": "typeLike",
-            "format": [
-              "PascalCase"
-            ]
+            "format": ["PascalCase"]
           },
           {
             "selector": "variable",
-            "types": [
-              "boolean"
-            ],
-            "format": [
-              "PascalCase"
-            ],
-            "prefix": [
-              "is",
-              "should",
-              "has",
-              "can",
-              "did",
-              "will"
-            ]
+            "types": ["boolean"],
+            "format": ["PascalCase"],
+            "prefix": ["is", "should", "has", "can", "did", "will"]
           }
         ],
         "@typescript-eslint/consistent-generic-constructors": "warn",
@@ -121,9 +95,7 @@
         "@typescript-eslint/parameter-properties": [
           "warn",
           {
-            "allow": [
-              "private readonly"
-            ]
+            "allow": ["private readonly"]
           }
         ],
         "@typescript-eslint/no-unnecessary-qualifier": "warn",
@@ -142,22 +114,22 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "excludedFiles": [
-        "*inline-template-*.component.html"
-      ],
+      "files": ["*.html"],
+      "excludedFiles": ["*inline-template-*.component.html"],
+      "extends": ["plugin:prettier/recommended"],
       "rules": {
+        // NOTE: WE ARE OVERRIDING THE DEFAULT CONFIG TO ALWAYS SET THE PARSER TO ANGULAR (SEE BELOW)
+        "prettier/prettier": [
+          "error",
+          {
+            "parser": "angular"
+          }
+        ]
       }
     }
   ]
