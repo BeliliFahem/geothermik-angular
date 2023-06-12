@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {
@@ -15,15 +15,11 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'geothermik-front-angular';
   apiResponse?: SupportEstimationDto;
 
-  constructor(private geothermikApiService: GeothermikApiService) {}
-
-  ngOnInit(): void {
-    console.log('AppComponent ngOnInit');
-  }
+  constructor(private readonly geothermikApiService: GeothermikApiService) {}
 
   sendSupportEstimationRequest(): void {
     const supportEstimationRequest: SupportEstimationRequestDto = {
@@ -44,6 +40,7 @@ export class AppComponent implements OnInit {
       .estimateSupport(supportEstimationRequest)
       .subscribe({
         next: (response) => {
+          // eslint-disable-next-line no-console
           console.log(
             'AppComponent > sendSupportEstimationRequest > response',
             response
@@ -51,6 +48,7 @@ export class AppComponent implements OnInit {
           this.apiResponse = response;
         },
         error: (error) => {
+          // eslint-disable-next-line no-console
           console.log(
             'AppComponent > sendSupportEstimationRequest > error',
             error
