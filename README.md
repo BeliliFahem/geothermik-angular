@@ -2,7 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
 
-## First run 
+## First run
+
 Run `npm run prepare`
 
 ## Development server
