@@ -1,8 +1,12 @@
 <main>
   <header class="brand-name">
     <h1>Gethermik</h1>
-    <button type="button" routerLink="/">Acceuil</button>
-    <button type="button" routerLink="/support">Nouvelle estimation</button>
+    <button type="button" mat-button color="primary" routerLink="/">
+      <mat-icon>home</mat-icon> Acceuil
+    </button>
+    <button type="button" mat-button color="primary" routerLink="/support">
+      Nouvelle estimation
+    </button>
   </header>
   <section class="content">
     <router-outlet></router-outlet>

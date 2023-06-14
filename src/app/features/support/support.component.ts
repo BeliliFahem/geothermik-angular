@@ -5,11 +5,12 @@ import {
   GeothermikApiService,
   SupportEstimationRequestDto,
 } from 'generated-sources/geothermik-api-client';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-support',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './support.component.html',
   styleUrls: ['./support.component.scss'],
 })

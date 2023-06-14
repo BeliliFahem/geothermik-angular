@@ -12,6 +12,9 @@ import {
   ConfigurationParameters,
 } from 'generated-sources/geothermik-api-client';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,6 +25,8 @@ import {
     CommonModule,
     RouterOutlet,
     AppRoutingModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
