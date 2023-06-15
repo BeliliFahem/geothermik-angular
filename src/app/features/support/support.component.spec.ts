@@ -9,7 +9,7 @@ describe('SupportComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SupportComponent, HttpClientModule],
+      imports: [HttpClientModule],
     });
     fixture = TestBed.createComponent(SupportComponent);
     component = fixture.componentInstance;

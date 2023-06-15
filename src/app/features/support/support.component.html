@@ -1,8 +1,45 @@
-<p>support works!</p>
-<button
-  type="button"
-  mat-stroked-button
-  color="accent"
-  (click)="sendSupportEstimationRequest()">
-  Estimer mon accompagnement
-</button>
+<h3 class="title">Demande d'estimation d'aides</h3>
+
+<mat-stepper labelPosition="bottom" linear #stepper>
+  <mat-step [stepControl]="personalInfoFormGroup" [editable]="true">
+    <ng-template matStepLabel>Vos informations</ng-template>
+    <mat-card>
+      <mat-card-content>
+        <app-personal-info-form [formGroup]="personalInfoFormGroup">
+          <div>
+            <button mat-button matStepperNext (click)="onNextStepClicked()">
+              Continuer
+            </button>
+          </div>
+        </app-personal-info-form>
+      </mat-card-content>
+    </mat-card>
+  </mat-step>
+
+  <mat-step [stepControl]="projectInfoFormGroup" [editable]="true">
+    <ng-template matStepLabel>Votre projet</ng-template>
+    <form [formGroup]="projectInfoFormGroup">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          formControlName="secondCtrl"
+          placeholder="Ex. 1 Main St, New York, NY"
+          required />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button matStepperNext>Continuer</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Votre accompagnement</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Retour</button>
+      <button mat-button (click)="stepper.reset()">Réinitialiser</button>
+    </div>
+  </mat-step>
+</mat-stepper>

@@ -1,0 +1,57 @@
+<form *ngIf="formGroup" [formGroup]="formGroup">
+  <div class="form-grid">
+    <mat-form-field class="civility">
+      <mat-label>Civilité</mat-label>
+      <!-- <mat-select formControlName="civilityCtrl" name="food"> -->
+      <mat-select formControlName="civility">
+        <mat-option
+          *ngFor="let civility of civilityOptions | keyvalue"
+          [value]="civility.key">
+          {{ civility.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="empty"></div>
+
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="lastName"
+        placeholder="Votre nom"
+        required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Prénom</mat-label>
+      <input
+        matInput
+        formControlName="firstName"
+        placeholder="Votre prénom"
+        required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Votre email"
+        required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Téléphone mobile</mat-label>
+      <input
+        matInput
+        formControlName="phoneNumber"
+        placeholder="Votre téléphone mobile"
+        required />
+    </mat-form-field>
+  </div>
+
+  <ng-content></ng-content>
+</form>
