@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 // TODO fix the eslint-disable comment above
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 import {
   Civility,
   GeothermikApiService,
   SupportEstimationRequestDto,
 } from 'generated-sources/geothermik-api-client';
-import { FormGroupOf } from 'src/app/shared/form-group-of';
-
-type PersonalInfo = Partial<SupportEstimationRequestDto>;
 
 @Component({
   selector: 'app-support',
@@ -18,54 +16,22 @@ type PersonalInfo = Partial<SupportEstimationRequestDto>;
   styleUrls: ['./support.component.scss'],
 })
 export class SupportComponent {
-  personalInfoFormGroup: FormGroup<FormGroupOf<PersonalInfo>>;
-  projectInfoFormGroup: FormGroup;
+  @ViewChild('stepper') stepper?: MatStepper;
 
-  private readonly alphabeticValitarors = [
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(10),
-    Validators.pattern('^[a-zA-ZÀ-ÿs]+$'),
-  ];
+  projectInfoFormGroup: FormGroup;
 
   constructor(
     private readonly geothermikApiService: GeothermikApiService,
     private readonly formBuilder: FormBuilder
   ) {
-    // TODO try to use the formGroup from PersonalInfoFormComponent
-    this.personalInfoFormGroup = this.formBuilder.group<
-      FormGroupOf<PersonalInfo>
-    >({
-      civility: this.formBuilder.control<Civility>(
-        Civility.M,
-        Validators.required
-      ),
-      lastName: this.formBuilder.control<string>('', this.alphabeticValitarors),
-      firstName: this.formBuilder.control<string>(
-        '',
-        this.alphabeticValitarors
-      ),
-      email: this.formBuilder.control<string>('', [
-        Validators.required,
-        Validators.email,
-      ]),
-      phoneNumber: this.formBuilder.control<string>('', [
-        Validators.required,
-        Validators.pattern('^(06|07)\\d{8}$'),
-      ]),
-    });
-
     this.projectInfoFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required],
     });
   }
 
-  onNextStepClicked(): void {
-    if (this.personalInfoFormGroup.valid) {
-      // TODO fill the SupportEstimationRequestDto
-      // const supportEstimationRequest: SupportEstimationRequestDto = this
-      //   .personalInfoFormGroup.value as SupportEstimationRequestDto;
-    }
+  onPersonalInfoValidated(value: Partial<SupportEstimationRequestDto>): void {
+    this.stepper?.next();
+    // TODO fill a SupportEstimationRequestDto
   }
 
   private sendSupportEstimationRequest(): void {

@@ -1,16 +1,12 @@
 <h3 class="title">Demande d'estimation d'aides</h3>
 
 <mat-stepper labelPosition="bottom" linear #stepper>
-  <mat-step [stepControl]="personalInfoFormGroup" [editable]="true">
+  <mat-step [editable]="true">
     <ng-template matStepLabel>Vos informations</ng-template>
     <mat-card>
       <mat-card-content>
-        <app-personal-info-form [formGroup]="personalInfoFormGroup">
-          <div>
-            <button mat-button matStepperNext (click)="onNextStepClicked()">
-              Continuer
-            </button>
-          </div>
+        <app-personal-info-form
+          (formValidated)="onPersonalInfoValidated($event)">
         </app-personal-info-form>
       </mat-card-content>
     </mat-card>
