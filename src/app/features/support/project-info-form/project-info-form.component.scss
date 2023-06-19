@@ -1,0 +1,17 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2vw;
+  grid-template-areas:
+    'isOwner empty'
+    'householdPersonCount householdIncomes'
+    'surface surface';
+}
+
+.form-grid .empty {
+  grid-area: empty;
+}
+
+.form-grid mat-form-field:last-child {
+  grid-area: surface;
+}

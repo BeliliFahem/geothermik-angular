@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-// TODO fix the eslint-disable comment above
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 import {
@@ -18,20 +18,49 @@ import {
 export class SupportComponent {
   @ViewChild('stepper') stepper?: MatStepper;
 
-  projectInfoFormGroup: FormGroup;
+  personalInfoStepControl = new FormControl('', Validators.required);
+  projectInfoStepControl = new FormControl('', Validators.required);
 
-  constructor(
-    private readonly geothermikApiService: GeothermikApiService,
-    private readonly formBuilder: FormBuilder
-  ) {
-    this.projectInfoFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-  }
+  private supportEstimationRequestDto = {} as SupportEstimationRequestDto;
+
+  constructor(private readonly geothermikApiService: GeothermikApiService) {}
 
   onPersonalInfoValidated(value: Partial<SupportEstimationRequestDto>): void {
+    this.supportEstimationRequestDto = {
+      ...this.supportEstimationRequestDto,
+      ...value,
+    } as SupportEstimationRequestDto;
+
+    this.setStepValidationState(this.personalInfoStepControl, true);
+
     this.stepper?.next();
-    // TODO fill a SupportEstimationRequestDto
+  }
+
+  onProjectInfoValidated(value: Partial<SupportEstimationRequestDto>): void {
+    this.supportEstimationRequestDto = {
+      ...this.supportEstimationRequestDto,
+      ...value,
+    } as SupportEstimationRequestDto;
+
+    this.setStepValidationState(this.projectInfoStepControl, true);
+
+    this.stepper?.next();
+  }
+
+  onSelectionChange(selection: StepperSelectionEvent): void {
+    if (selection.selectedIndex === 0) {
+      this.setStepValidationState(this.personalInfoStepControl, false);
+    } else if (selection.selectedIndex === 1) {
+      this.setStepValidationState(this.projectInfoStepControl, false);
+    }
+  }
+
+  private setStepValidationState(control: FormControl, valid: boolean): void {
+    if (valid) {
+      control.setErrors(null);
+    } else {
+      control.setErrors({ invalid: true });
+    }
   }
 
   private sendSupportEstimationRequest(): void {

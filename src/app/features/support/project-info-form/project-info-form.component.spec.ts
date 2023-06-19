@@ -1,29 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ProjectInfoFormComponent } from './project-info-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-import { PersonalInfoFormComponent } from './personal-info-form.component';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-describe('PersonalInfoFormComponent', () => {
-  let component: PersonalInfoFormComponent;
-  let fixture: ComponentFixture<PersonalInfoFormComponent>;
+describe('ProjectInfoFormComponent', () => {
+  let component: ProjectInfoFormComponent;
+  let fixture: ComponentFixture<ProjectInfoFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonalInfoFormComponent],
+      declarations: [ProjectInfoFormComponent],
       imports: [
         BrowserAnimationsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule,
+        MatSlideToggleModule,
       ],
     });
-    fixture = TestBed.createComponent(PersonalInfoFormComponent);
+    fixture = TestBed.createComponent(ProjectInfoFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -31,6 +30,6 @@ describe('PersonalInfoFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // TODO: Add tests if useful
 });
+
+// TODO: add useful tests

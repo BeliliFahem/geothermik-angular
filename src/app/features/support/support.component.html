@@ -1,7 +1,11 @@
 <h3 class="title">Demande d'estimation d'aides</h3>
 
-<mat-stepper labelPosition="bottom" linear #stepper>
-  <mat-step [editable]="true">
+<mat-stepper
+  labelPosition="bottom"
+  [linear]="true"
+  (selectionChange)="onSelectionChange($event)"
+  #stepper>
+  <mat-step [stepControl]="personalInfoStepControl" [editable]="true">
     <ng-template matStepLabel>Vos informations</ng-template>
     <mat-card>
       <mat-card-content>
@@ -12,22 +16,21 @@
     </mat-card>
   </mat-step>
 
-  <mat-step [stepControl]="projectInfoFormGroup" [editable]="true">
+  <mat-step [stepControl]="projectInfoStepControl" [editable]="true">
     <ng-template matStepLabel>Votre projet</ng-template>
-    <form [formGroup]="projectInfoFormGroup">
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input
-          matInput
-          formControlName="secondCtrl"
-          placeholder="Ex. 1 Main St, New York, NY"
-          required />
-      </mat-form-field>
+    <mat-card>
+      <mat-card-content>
+        <app-project-info-form
+          (formValidated)="
+            onProjectInfoValidated($event)
+          "></app-project-info-form>
+      </mat-card-content>
+    </mat-card>
+    <!-- TODO : add a button to go back to the previous step
       <div>
         <button mat-button matStepperPrevious>Retour</button>
-        <button mat-button matStepperNext>Continuer</button>
       </div>
-    </form>
+    -->
   </mat-step>
 
   <mat-step>

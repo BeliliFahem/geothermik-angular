@@ -1,0 +1,43 @@
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="form-grid">
+    <mat-slide-toggle formControlName="isOwner">
+      Êtes-vous propriétaire ?
+    </mat-slide-toggle>
+
+    <div class="empty"></div>
+
+    <mat-form-field>
+      <mat-label>Nombre de personnes</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="householdPersonCount"
+        placeholder="Nombre de personnes dans le foyer"
+        required />
+    </mat-form-field>
+
+    <mat-form-field formGroupName="householdIncomes">
+      <mat-label>Revenus du foyer (€)</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="value"
+        placeholder="Revenus du foyer"
+        required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>La surface du bien (m2)</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="surface"
+        placeholder="La surface du bien en m2"
+        required />
+    </mat-form-field>
+  </div>
+
+  <button mat-button type="submit" [disabled]="!formGroup.valid">
+    Valider
+  </button>
+</form>

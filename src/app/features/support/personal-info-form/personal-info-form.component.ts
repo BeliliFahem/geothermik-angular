@@ -6,6 +6,7 @@ import {
   Civility,
   SupportEstimationRequestDto,
 } from 'generated-sources/geothermik-api-client';
+import { alphabeticValidators } from 'src/app/shared/form-common-validators';
 import { FormGroupOf } from 'src/app/shared/form-group-of';
 
 type PersonalInfoFormGroup = FormGroup<
@@ -22,17 +23,22 @@ export class PersonalInfoFormComponent {
     Partial<SupportEstimationRequestDto>
   >();
 
-  formGroup: PersonalInfoFormGroup;
+  formGroup: PersonalInfoFormGroup = new FormGroup({});
   civilityOptions = Civility;
 
-  private readonly alphabeticValitarors = [
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(10),
-    Validators.pattern('^[a-zA-ZÀ-ÿs]+$'),
-  ];
-
   constructor(private readonly formBuilder: FormBuilder) {
+    this.initForm();
+  }
+
+  onSubmit(): void {
+    if (this.formGroup.valid) {
+      this.formValidated.emit(
+        this.formGroup.value as Partial<SupportEstimationRequestDto>
+      );
+    }
+  }
+
+  private initForm(): void {
     this.formGroup = this.formBuilder.group<
       FormGroupOf<Partial<SupportEstimationRequestDto>>
     >({
@@ -40,11 +46,8 @@ export class PersonalInfoFormComponent {
         Civility.M,
         Validators.required
       ),
-      lastName: this.formBuilder.control<string>('', this.alphabeticValitarors),
-      firstName: this.formBuilder.control<string>(
-        '',
-        this.alphabeticValitarors
-      ),
+      lastName: this.formBuilder.control<string>('', alphabeticValidators()),
+      firstName: this.formBuilder.control<string>('', alphabeticValidators()),
       email: this.formBuilder.control<string>('', [
         Validators.required,
         Validators.email,
@@ -54,13 +57,5 @@ export class PersonalInfoFormComponent {
         Validators.pattern('^(06|07)\\d{8}$'),
       ]),
     });
-  }
-
-  onSubmit(): void {
-    if (this.formGroup.valid) {
-      this.formValidated.emit(
-        this.formGroup.value as Partial<SupportEstimationRequestDto>
-      );
-    }
   }
 }

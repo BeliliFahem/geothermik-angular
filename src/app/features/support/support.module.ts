@@ -15,9 +15,15 @@ import { PersonalInfoFormComponent } from './personal-info-form/personal-info-fo
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { ProjectInfoFormComponent } from './project-info-form/project-info-form.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
-  declarations: [SupportComponent, PersonalInfoFormComponent],
+  declarations: [
+    SupportComponent,
+    PersonalInfoFormComponent,
+    ProjectInfoFormComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -30,6 +36,7 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
+    MatSlideToggleModule,
     MatCardModule,
     SupportRoutingModule,
   ],
