@@ -1,0 +1,69 @@
+<h3 class="title">Demande d'estimation d'aides</h3>
+
+<mat-stepper
+  labelPosition="bottom"
+  [linear]="true"
+  (selectionChange)="onSelectionChange($event)"
+  #stepper>
+  <mat-step [stepControl]="personalInfoStepControl" [editable]="true">
+    <ng-template matStepLabel>Vos informations</ng-template>
+    <mat-card>
+      <mat-card-content>
+        <app-personal-info-form
+          (formValidated)="onPersonalInfoValidated($event)">
+        </app-personal-info-form>
+      </mat-card-content>
+    </mat-card>
+  </mat-step>
+
+  <mat-step [stepControl]="projectInfoStepControl" [editable]="true">
+    <ng-template matStepLabel>Votre projet</ng-template>
+    <mat-card>
+      <mat-card-content>
+        <app-project-info-form
+          (formValidated)="
+            onProjectInfoValidated($event)
+          "></app-project-info-form>
+      </mat-card-content>
+    </mat-card>
+    <!-- TODO : add a button to go back to the previous step
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+      </div>
+    -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Votre accompagnement</ng-template>
+    <mat-card>
+      <mat-card-content>
+        <ng-container
+          *ngIf="
+            estimationErrorOccurred;
+            then estimationError;
+            else estimationSuccess
+          "></ng-container>
+
+        <mat-card-footer>
+          <button mat-button (click)="reset()">Réinitialiser</button>
+        </mat-card-footer>
+      </mat-card-content>
+    </mat-card>
+  </mat-step>
+</mat-stepper>
+
+<ng-template #estimationError>
+  <div class="estimation-error-wrapper">
+    <mat-icon color="warn">error</mat-icon>
+    <span class="estimation-error-message">
+      Une erreur est survenue. Veuillez réessayer ultérieurement
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #estimationSuccess>
+  <app-estimation-summary
+    [supportEstimationDto]="supportEstimationDto"
+    [supportEstimationRequestDto]="supportEstimationRequestDto">
+  </app-estimation-summary>
+</ng-template>

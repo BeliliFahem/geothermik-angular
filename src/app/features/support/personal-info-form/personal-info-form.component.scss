@@ -1,0 +1,14 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1vw;
+
+  grid-template-areas:
+    'civility empty'
+    'first-name last-name'
+    'email phone';
+}
+
+.empty {
+  grid-area: empty;
+}
