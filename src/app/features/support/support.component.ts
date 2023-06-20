@@ -3,6 +3,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { captureException } from '@sentry/angular-ivy';
 
 import {
   GeothermikApiService,
@@ -24,6 +25,8 @@ export class SupportComponent {
   supportEstimationDto?: SupportEstimationDto = {} as SupportEstimationDto;
 
   supportEstimationRequestDto = {} as SupportEstimationRequestDto;
+
+  estimationErrorOccurred = false;
 
   constructor(private readonly geothermikApiService: GeothermikApiService) {}
 
@@ -62,6 +65,7 @@ export class SupportComponent {
   reset(): void {
     this.supportEstimationRequestDto = {} as SupportEstimationRequestDto;
     this.supportEstimationDto = undefined;
+    this.estimationErrorOccurred = false;
     this.stepper?.reset();
   }
 
@@ -79,14 +83,11 @@ export class SupportComponent {
       .subscribe({
         next: (response) => {
           this.supportEstimationDto = response;
+          this.estimationErrorOccurred = false;
         },
         error: (error) => {
-          // TODO: handle error
-          // eslint-disable-next-line no-console
-          console.log(
-            'AppComponent > sendSupportEstimationRequest > error',
-            error
-          );
+          this.estimationErrorOccurred = true;
+          captureException(error);
         },
       });
   }

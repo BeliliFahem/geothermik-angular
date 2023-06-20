@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test-once": "ng test --watch=false",
+    "test-once": "ng test --no-watch --no-progress",
     "generate-api-client": "npx @openapitools/openapi-generator-cli generate -i ./openapi/geothermik-api.yaml -g typescript-angular -o generated-sources/geothermik-api-client --additional-properties=ngVersion=16.0.4,fileNaming=kebab-case,stringEnums=true,serviceSuffix=ApiService,serviceFileSuffix=-api.service",
     "lint": "ng lint",
     "format": "prettier --write .",
@@ -25,6 +25,7 @@
     "@angular/platform-browser": "^16.0.4",
     "@angular/platform-browser-dynamic": "^16.0.4",
     "@angular/router": "^16.0.4",
+    "@sentry/angular-ivy": "^7.56.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

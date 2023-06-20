@@ -32,6 +32,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODOs
 
+[] Better handle input errors on forms with messages
+[] Use Source Maps with Sentry
 [] Dockerize application
 [] Move @openapitools/openapi-generator-cli to docker container
 [] Separate the API client on it's own repository ?

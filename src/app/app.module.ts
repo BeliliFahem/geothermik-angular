@@ -1,6 +1,12 @@
-import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  DEFAULT_CURRENCY_CODE,
+  ErrorHandler,
+  LOCALE_ID,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import localeFrF from '@angular/common/locales/fr';
+import * as Sentry from '@sentry/angular-ivy';
 
 registerLocaleData(localeFrF);
 
@@ -38,6 +45,23 @@ registerLocaleData(localeFrF);
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/explicit-function-return-type
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

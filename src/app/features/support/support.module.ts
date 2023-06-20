@@ -21,6 +21,7 @@ import { EstimationSummaryComponent } from './estimation-summary/estimation-summ
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { AmountComponent } from 'src/app/shared/amount/amount.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AmountComponent } from 'src/app/shared/amount/amount.component';
     MatCardModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatIconModule,
     AmountComponent,
     SupportRoutingModule,
   ],

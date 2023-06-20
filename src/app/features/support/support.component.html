@@ -37,10 +37,13 @@
     <ng-template matStepLabel>Votre accompagnement</ng-template>
     <mat-card>
       <mat-card-content>
-        <app-estimation-summary
-          [supportEstimationDto]="supportEstimationDto"
-          [supportEstimationRequestDto]="supportEstimationRequestDto">
-        </app-estimation-summary>
+        <ng-container
+          *ngIf="
+            estimationErrorOccurred;
+            then estimationError;
+            else estimationSuccess
+          "></ng-container>
+
         <mat-card-footer>
           <button mat-button (click)="reset()">Réinitialiser</button>
         </mat-card-footer>
@@ -48,3 +51,19 @@
     </mat-card>
   </mat-step>
 </mat-stepper>
+
+<ng-template #estimationError>
+  <div class="estimation-error-wrapper">
+    <mat-icon color="warn">error</mat-icon>
+    <span class="estimation-error-message">
+      Une erreur est survenue. Veuillez réessayer ultérieurement
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #estimationSuccess>
+  <app-estimation-summary
+    [supportEstimationDto]="supportEstimationDto"
+    [supportEstimationRequestDto]="supportEstimationRequestDto">
+  </app-estimation-summary>
+</ng-template>

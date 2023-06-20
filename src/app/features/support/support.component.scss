@@ -8,3 +8,14 @@ mat-card {
   padding-left: 2vw;
   padding-right: 2vw;
 }
+
+.estimation-error-wrapper {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+.estimation-error-message {
+  padding: 24x 0;
+}
