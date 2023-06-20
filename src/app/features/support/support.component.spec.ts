@@ -20,3 +20,5 @@ describe('SupportComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+// add usefull tests

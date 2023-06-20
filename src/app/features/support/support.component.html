@@ -35,10 +35,16 @@
 
   <mat-step>
     <ng-template matStepLabel>Votre accompagnement</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Retour</button>
-      <button mat-button (click)="stepper.reset()">Réinitialiser</button>
-    </div>
+    <mat-card>
+      <mat-card-content>
+        <app-estimation-summary
+          [supportEstimationDto]="supportEstimationDto"
+          [supportEstimationRequestDto]="supportEstimationRequestDto">
+        </app-estimation-summary>
+        <mat-card-footer>
+          <button mat-button (click)="reset()">Réinitialiser</button>
+        </mat-card-footer>
+      </mat-card-content>
+    </mat-card>
   </mat-step>
 </mat-stepper>

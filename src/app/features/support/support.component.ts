@@ -5,8 +5,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 import {
-  Civility,
   GeothermikApiService,
+  SupportEstimationDto,
   SupportEstimationRequestDto,
 } from 'generated-sources/geothermik-api-client';
 
@@ -21,7 +21,9 @@ export class SupportComponent {
   personalInfoStepControl = new FormControl('', Validators.required);
   projectInfoStepControl = new FormControl('', Validators.required);
 
-  private supportEstimationRequestDto = {} as SupportEstimationRequestDto;
+  supportEstimationDto?: SupportEstimationDto = {} as SupportEstimationDto;
+
+  supportEstimationRequestDto = {} as SupportEstimationRequestDto;
 
   constructor(private readonly geothermikApiService: GeothermikApiService) {}
 
@@ -44,6 +46,8 @@ export class SupportComponent {
 
     this.setStepValidationState(this.projectInfoStepControl, true);
 
+    this.sendSupportEstimationRequest();
+
     this.stepper?.next();
   }
 
@@ -55,6 +59,12 @@ export class SupportComponent {
     }
   }
 
+  reset(): void {
+    this.supportEstimationRequestDto = {} as SupportEstimationRequestDto;
+    this.supportEstimationDto = undefined;
+    this.stepper?.reset();
+  }
+
   private setStepValidationState(control: FormControl, valid: boolean): void {
     if (valid) {
       control.setErrors(null);
@@ -64,31 +74,14 @@ export class SupportComponent {
   }
 
   private sendSupportEstimationRequest(): void {
-    const supportEstimationRequest: SupportEstimationRequestDto = {
-      civility: Civility.M,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@mail.com',
-      phoneNumber: '0123456789',
-      isOwner: true,
-      householdPersonCount: 2,
-      householdIncomes: {
-        value: 10000,
-      },
-      surface: 100,
-    };
-
     this.geothermikApiService
-      .estimateSupport(supportEstimationRequest)
+      .estimateSupport(this.supportEstimationRequestDto)
       .subscribe({
         next: (response) => {
-          // eslint-disable-next-line no-console
-          console.log(
-            'AppComponent > sendSupportEstimationRequest > response',
-            response
-          );
+          this.supportEstimationDto = response;
         },
         error: (error) => {
+          // TODO: handle error
           // eslint-disable-next-line no-console
           console.log(
             'AppComponent > sendSupportEstimationRequest > error',

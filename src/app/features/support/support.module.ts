@@ -17,12 +17,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { ProjectInfoFormComponent } from './project-info-form/project-info-form.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { EstimationSummaryComponent } from './estimation-summary/estimation-summary.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatListModule } from '@angular/material/list';
+import { AmountComponent } from 'src/app/shared/amount/amount.component';
 
 @NgModule({
   declarations: [
     SupportComponent,
     PersonalInfoFormComponent,
     ProjectInfoFormComponent,
+    EstimationSummaryComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +43,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatOptionModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatProgressSpinnerModule,
+    MatListModule,
+    AmountComponent,
     SupportRoutingModule,
   ],
 })
