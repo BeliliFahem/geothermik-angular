@@ -1,8 +1,40 @@
 # GeothermikFrontAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+This project was generated with ❤️ and [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+
+This Web Application is a Kata Code (~exercise) where I put a maximum of craft. For full description of the Kata, please see the document **kata-geothermik.pdf**.
+
+The Application consumes the REST API that is in the repository : https://gitlab.com/geothermik/geothermik-api
+
+In this project are illustrated:
+
+- Compliance with the DDD,
+- DTO pattern,
+- Use of OpenAPI Generator,
+- Use of strict eslint rules,
+- Material Design (Angular Material),
+- Stryctly typed Reactive Forms,
+- Sentry for application monitoring,
+- GitFlow with conventional commits and git hooks,
+- As well as other development best practices.
+
+## Quick start
+
+This is a quick start to run the app on your local machine.
+
+```bash
+$ npm install
+# Generate the API Client based on the file 'openapi\geothermik-api.yaml'
+$ npm run prepare
+$ ng serve
+# The API is reay on http://localhost:4200 !
+```
+
+Note: For full operation with front and back, you can simply launch the back application with just two instructions: https://gitlab.com/geothermik/geothermik-api#quick-start
 
 ## First run
+
+Generate the API Client based on the file 'openapi\geothermik-api.yaml'.
 
 Run `npm run prepare`
 
@@ -32,8 +64,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODOs
 
-[] Better handle input errors on forms with messages
-[] Use Source Maps with Sentry
-[] Dockerize application
-[] Move @openapitools/openapi-generator-cli to docker container
-[] Separate the API client on it's own repository ?
+- [ ] Better handle input errors on forms with messages
+- [ ] Use Source Maps with Sentry
+- [ ] Dockerize application
+- [ ] Move @openapitools/openapi-generator-cli to docker container
+- [ ] Separate the API client on it's own repository ?
+
+--
+Author - [Fahem BELILI](https://belilifahem.com)
