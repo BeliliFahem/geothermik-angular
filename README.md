@@ -30,7 +30,11 @@ $ ng serve
 # The API is reay on http://localhost:4200 !
 ```
 
-Note: For full operation with front and back, you can simply launch the back application with just two instructions: https://gitlab.com/geothermik/geothermik-api#quick-start
+Note: For full operation with front and back, you can simply launch the back application with just two instructions:
+
+GitLab: https://gitlab.com/geothermik/geothermik-api#quick-start
+
+GitHub: https://github.com/BeliliFahem/geothermik-api#quick-start
 
 ## First run
 
